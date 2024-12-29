@@ -2,7 +2,13 @@ export function request(ctx) {
     const { ingredients = [] } = ctx.args;
   
     // Construct the prompt with the provided ingredients
-    const prompt = `Suggest a recipe idea using these ingredients: ${ingredients.join(", ")}.`;
+    const prompt = `Suggest a recipe idea using: ${ingredients}.`;
+    console.log("User Input:", ingredients);
+
+    // Check if ingredients are provided
+    if (!ingredients || ingredients.length === 0 || ingredients.every(ingredient => ingredient.trim() === "")) {
+      console.log("Warning: No content provided.");
+    }
   
     // Return the request configuration
     return {
@@ -38,9 +44,9 @@ export function request(ctx) {
   
     // Validate content structure
     if (!parsedBody.content || !Array.isArray(parsedBody.content) || parsedBody.content.length === 0) {
+      console.log("Error: Invalid response format from Bedrock API.");
       return {
-        body: "Error: Invalid response format from Bedrock API.",
-        error: "Invalid response format",
+        body: "Error observed, please try again",
       };
     }
   

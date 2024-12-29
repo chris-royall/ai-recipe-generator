@@ -22,27 +22,34 @@ function App() {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-
+  
+    const formData = new FormData(event.currentTarget);
+    const ingredients = formData.get("ingredients")?.toString()?.trim() || "";
+  
+    if (!ingredients) {
+      alert("Please provide some ingredients or details.");
+      setLoading(false);
+      return;
+    }
+  
     try {
-      const formData = new FormData(event.currentTarget);
-      
       const { data, errors } = await amplifyClient.queries.askBedrock({
-        ingredients: [formData.get("ingredients")?.toString() || ""],
+        ingredients: [ingredients],
       });
-
+  
       if (!errors) {
         setResult(data?.body || "No data returned");
       } else {
         console.log(errors);
       }
-
+  
     } catch (e) {
       alert(`An error occurred: ${e}`);
     } finally {
       setLoading(false);
     }
   };
-
+  
   const handleCopy = () => {
     navigator.clipboard.writeText(result)
       .then(() => {
@@ -64,12 +71,18 @@ function App() {
   return (
     <div className="app-container">
       <div className="header-container">
+        <button onClick={handleSignOut} className="signout-button">
+          Sign Out
+        </button>
+        <button className="home-button">
+          <a href="https://www.chrisroyall.com" target="_blank">Home</a>
+        </button>
         <h1 className="main-header">
           CR Recipe Generator
           <br />
         </h1>
         <p className="description">
-          Enter a list of ingredients, and discover a delicious recipe tailored just for you!
+        Provide as much or as little information as you wouldd like. List your ingredients, preferred cuisine, favourite flavors, dietary preferences, cooking time, skill level, or any appliances you will use. The more details you share, the better your tailored, delicious recipe will be!
         </p>
       </div>
       <form onSubmit={onSubmit} className="form-container">
@@ -79,7 +92,7 @@ function App() {
             className="wide-input"
             id="ingredients"
             name="ingredients"
-            placeholder="Ingredients..."
+            placeholder="Ingredients, Cusine, Flavours, Dietary, Cooking Time..."
           />
           <button type="submit" className="search-button">
             Generate
@@ -110,14 +123,6 @@ function App() {
         )}
       </div>
       
-      <button onClick={handleSignOut} className="signout-button">
-        Sign Out
-      </button>
-
-      <button className="home-button">
-        <a href="https://www.chrisroyall.com" target="_blank">Home</a>
-      </button>
-
       <footer>
         <p><a href="https://www.chrisroyall.com" target="_blank">Christopher Royall</a> | <a href="https://www.termsfeed.com/live/e4a4dd9a-6dfa-4681-8c4c-2d0e62ba3805" target="_blank">Privacy Policy</a></p>
       </footer>
