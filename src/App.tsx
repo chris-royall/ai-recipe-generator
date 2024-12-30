@@ -82,7 +82,7 @@ function App() {
           <br />
         </h1>
         <p className="description">
-        Provide as much or as little information as you wouldd like. List your ingredients, preferred cuisine, favourite flavors, dietary preferences, cooking time, skill level, or any appliances you will use. The more details you share, the better your tailored, delicious recipe will be!
+        Provide as much or as little information as you would like. List your ingredients, preferred cuisine, favourite flavors, dietary preferences, cooking time, skill level, or any appliances you will use. The more details you share, the better your tailored, delicious recipe will be!
         </p>
       </div>
       <form onSubmit={onSubmit} className="form-container">
