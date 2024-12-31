@@ -4,11 +4,17 @@ Welcome to the **AI Recipe Generator** project! This repository highlights my ex
 
 ## Table of Contents
 
+- [Deployed Application](#deployed-application)
 - [Technology Stack](#technology-stack)
 - [AI Workflow](#ai-workflow)
 - [AppSync with GraphQL API](#appsync-with-graphql-api)
 - [Logging](#logging)
-- [Deployed Application](#deployed-application)
+
+## Deployed Application
+
+You can access the live application here: [AI Recipe Generator](https://recipes.chrisroyall.com)
+
+![Infrastructure Diagram](/src/assets/airecipegenerator-infrastructure.png)
 
 ## Technology Stack
 
@@ -85,9 +91,3 @@ Comprehensive logging is implemented using Amazon CloudWatch to ensure visibilit
 
 ### Log Retention
 - Logs are stored in CloudWatch for a retention period of 7 days.
-
-## Deployed Application
-
-You can access the live application here: [AI Recipe Generator](https://recipes.chrisroyall.com)
-
-![Infrastructure Diagram](/src/assets/airecipegenerator-infrastructure.png)
