@@ -2,8 +2,8 @@ export function request(ctx) {
     const { ingredients = [] } = ctx.args;
   
     // Construct the prompt with the provided ingredients
-    const prompt = `Suggest a recipe idea using: ${ingredients}.`;
-    console.log("User Input:", ingredients);
+    const prompt = `Suggest multiple recipes with detailed instructions using: ${ingredients}.`;
+    console.log("Prompt:", prompt);
 
     // Check if ingredients are provided
     if (!ingredients || ingredients.length === 0 || ingredients.every(ingredient => ingredient.trim() === "")) {
