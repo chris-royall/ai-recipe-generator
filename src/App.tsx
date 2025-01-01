@@ -92,7 +92,7 @@ function App() {
         </h1>
         <p className="description">
         Provide as much or as little information as you would like.<br/>
-        Optionally list ingredients, cuisine, dietary requirements, cooking time, skill level, or any appliances you will use.
+        Optionally list ingredients, cuisine, dietary requirements, cooking time, skill level, or any other details.
         </p>
       </div>
       <form onSubmit={onSubmit} className="form-container">
