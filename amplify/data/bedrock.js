@@ -2,13 +2,8 @@ export function request(ctx) {
     const { ingredients = [] } = ctx.args;
   
     // Construct the prompt with the provided ingredients
-    const prompt = `Suggest multiple recipes with detailed instructions using: ${ingredients}.`;
+    const prompt = `Suggest multiple recipes with detailed instructions. ${ingredients}. Provide the output in a compressed HTML text format.`;
     console.log("Prompt:", prompt);
-
-    // Check if ingredients are provided
-    if (!ingredients || ingredients.length === 0 || ingredients.every(ingredient => ingredient.trim() === "")) {
-      console.log("Warning: No content provided.");
-    }
   
     // Return the request configuration
     return {
