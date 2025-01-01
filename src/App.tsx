@@ -24,7 +24,16 @@ function App() {
     setLoading(true);
   
     const formData = new FormData(event.currentTarget);
-    const ingredients = formData.get("ingredients")?.toString()?.trim() || "";
+
+    const ingredients = 
+    (formData.get("ingredients")?.toString()?.trim() || "") + ", " +
+    (formData.get("cuisine")?.toString()?.trim() || "") + ", " +
+    (formData.get("dietary-requirements")?.toString()?.trim() || "") + ", " +
+    (formData.get("cooking-time")?.toString()?.trim() || "") + ", " +
+    (formData.get("skill-level")?.toString()?.trim() || "") + ", " +
+    (formData.get("other")?.toString()?.trim() || "");
+  
+    console .log(ingredients);
   
     if (!ingredients) {
       alert("Please provide some ingredients or details.");
@@ -82,7 +91,8 @@ function App() {
           <br />
         </h1>
         <p className="description">
-        Provide as much or as little information as you would like. List your ingredients, preferred cuisine, favourite flavors, dietary preferences, cooking time, skill level, or any appliances you will use. The more details you share, the better your tailored, delicious recipe will be!
+        Provide as much or as little information as you would like.<br/>
+        Optionally list ingredients, cuisine, dietary requirements, cooking time, skill level, or any other details.
         </p>
       </div>
       <form onSubmit={onSubmit} className="form-container">
@@ -92,7 +102,42 @@ function App() {
             className="wide-input"
             id="ingredients"
             name="ingredients"
-            placeholder="Ingredients, Cusine, Flavours, Dietary, Cooking Time..."
+            placeholder="Ingredients"
+          />
+          <input
+            type="text"
+            className="wide-input"
+            id="cuisine"
+            name="cuisine"
+            placeholder="Cuisine"
+          />
+          <input
+            type="text"
+            className="wide-input"
+            id="dietary-requirements"
+            name="dietary-requirements"
+            placeholder="Dietary requirements"
+          />
+          <input
+            type="text"
+            className="wide-input"
+            id="cooking-time"
+            name="cooking-time"
+            placeholder="Cooking time"
+          />
+          <input
+            type="text"
+            className="wide-input"
+            id="skill-level"
+            name="skill-level"
+            placeholder="Skill level"
+          />
+          <input
+            type="text"
+            className="wide-input"
+            id="other"
+            name="other"
+            placeholder="Other"
           />
           <button type="submit" className="search-button">
             Generate
