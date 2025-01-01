@@ -7,6 +7,7 @@ import { generateClient } from "aws-amplify/data";
 import outputs from "../amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { signOut } from 'aws-amplify/auth';
+import DOMPurify from "dompurify";
 
 Amplify.configure(outputs);
 
@@ -25,22 +26,18 @@ function App() {
   
     const formData = new FormData(event.currentTarget);
 
-    const ingredients = 
-    (formData.get("ingredients")?.toString()?.trim() || "") + ", " +
-    (formData.get("cuisine")?.toString()?.trim() || "") + ", " +
-    (formData.get("dietary-requirements")?.toString()?.trim() || "") + ", " +
-    (formData.get("cooking-time")?.toString()?.trim() || "") + ", " +
-    (formData.get("skill-level")?.toString()?.trim() || "") + ", " +
-    (formData.get("other")?.toString()?.trim() || "");
+    const ingredients = [
+      formData.get("ingredients")?.toString()?.trim() ? `Ingredients: ${formData.get("ingredients")!.toString().trim()}` : null,
+      formData.get("cuisine")?.toString()?.trim() ? `Cuisine: ${formData.get("cuisine")!.toString().trim()}` : null,
+      formData.get("dietary-requirements")?.toString()?.trim() ? `Dietary Requirements: ${formData.get("dietary-requirements")!.toString().trim()}` : null,
+      formData.get("cooking-time")?.toString()?.trim() ? `Cooking Time: ${formData.get("cooking-time")!.toString().trim()}` : null,
+      formData.get("skill-level")?.toString()?.trim() ? `Skill Level: ${formData.get("skill-level")!.toString().trim()}` : null,
+      formData.get("other")?.toString()?.trim() ? `${formData.get("other")!.toString().trim()}` : null,
+      formData.get("free-text")?.toString()?.trim() ? `${formData.get("other")!.toString().trim()}` : null
+  ].filter(Boolean).join(" | ");
   
-    console .log(ingredients);
-  
-    if (!ingredients) {
-      alert("Please provide some ingredients or details.");
-      setLoading(false);
-      return;
-    }
-  
+  console.log(ingredients);
+        
     try {
       const { data, errors } = await amplifyClient.queries.askBedrock({
         ingredients: [ingredients],
@@ -139,6 +136,14 @@ function App() {
             name="other"
             placeholder="Other"
           />
+          <h2>OR</h2>
+          <input
+            type="text"
+            className="wide-input"
+            id="free-text"
+            name="free-text"
+            placeholder="Free text"
+          />
           <button type="submit" className="search-button">
             Generate
           </button>
@@ -156,13 +161,18 @@ function App() {
         ) : (
           result && (
             <div className="result">
+              <h1>Result</h1>
               <button
                 className={`copy-button ${copied ? "copied" : ""}`}
                 onClick={handleCopy}
               >
                 {copied ? "Copied!" : "Copy"}
               </button>
-              <p>{result}</p>
+              <div
+                dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(result),
+                }}
+              />
             </div>
           )
         )}
