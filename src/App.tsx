@@ -33,11 +33,9 @@ function App() {
       formData.get("cooking-time")?.toString()?.trim() ? `Cooking Time: ${formData.get("cooking-time")!.toString().trim()}` : null,
       formData.get("skill-level")?.toString()?.trim() ? `Skill Level: ${formData.get("skill-level")!.toString().trim()}` : null,
       formData.get("other")?.toString()?.trim() ? `${formData.get("other")!.toString().trim()}` : null,
-      formData.get("free-text")?.toString()?.trim() ? `${formData.get("other")!.toString().trim()}` : null
+      formData.get("free-text")?.toString()?.trim() ? `${formData.get("free-text")!.toString().trim()}` : null
   ].filter(Boolean).join(" | ");
-  
-  console.log(ingredients);
-        
+          
     try {
       const { data, errors } = await amplifyClient.queries.askBedrock({
         ingredients: [ingredients],
