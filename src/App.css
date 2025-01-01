@@ -40,6 +40,10 @@
   margin-bottom: 20px;
 }
 
+.form-container h2 {
+  color: black
+}
+
 .search-container {
   display: flex;
   flex-direction: column;
@@ -66,6 +70,7 @@
   border: 3px solid #004e89;
   border-radius: 30px;
   cursor: pointer;
+  margin: 30px;
 }
 
 .search-button:hover {
@@ -84,8 +89,11 @@
 
 .result-container p {
   color: black;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 16px;
+}
+
+.result-container h1, h2, h3 {
+  color: #004e89;
 }
 
 .loader-container {
@@ -93,6 +101,12 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+}
+
+.loader-container p {
+  color: black;
+  font-size: 20px;
+  font-weight: bold !important;
 }
 
 .result {
@@ -119,6 +133,7 @@
   border-radius: 30px;
   cursor: pointer;
   font-size: 14px;
+  margin: 5px;
 }
 
 .copy-button:hover {
