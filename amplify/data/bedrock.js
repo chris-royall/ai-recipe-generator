@@ -2,7 +2,7 @@ export function request(ctx) {
     const { ingredients = [] } = ctx.args;
   
     // Construct the prompt with the provided ingredients
-    const prompt = `Suggest multiple recipes with detailed instructions. ${ingredients}. Provide the output in a compressed HTML text format.`;
+    const prompt = `Suggest multiple recipes with detailed instructions. ${ingredients}. Output list of ingrediants and instructions. Provide the output with: HTML styling, no line spacing, no introduction text.`;
     console.log("Prompt:", prompt);
   
     // Return the request configuration
