@@ -31,7 +31,6 @@ export function request(ctx) {
       7. If no recipes match the criteria, suggest a wildcard recipe that uses any ingredients provided.
       8. If no recipes match the criteria or wildcard recipe, suggest a generic recipe based on the provided inputs.
     `;
-    console.log("Prompt:", prompt);
   
     // Return the request configuration
     return {
